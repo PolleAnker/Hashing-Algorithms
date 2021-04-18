@@ -1,6 +1,6 @@
-from HashTable import HashTable
+from HashTableChained import HashTableChained
 
-t = HashTable()
+t = HashTableChained()
 
 t['march 6'] = 130
 val = t['march 6']
