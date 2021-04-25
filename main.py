@@ -1,17 +1,22 @@
 from Chaining import Chaining
 from LinearProbing import LinearProbing
+from QuadProbing import QuadProbing
 
 "Open Addressing Test (linear probing)"
-HOA = LinearProbing()
+HOA = QuadProbing()
 
 HOA["march 6"] = 130
 HOA["march 17"] = 20
+HOA["march 26"] = 58
+HOA["march 08"] = 70
 valHOA = HOA["march 6"]
 valHOA2 = HOA["march 17"]
 valHOANull = HOA["march 20"]
+valHOA3 = HOA["march 26"]
 print(valHOA)
 print(valHOA2)
 print(valHOANull)
+print(valHOA3)
 print(HOA.arr)
 
 del HOA["march 17"]
