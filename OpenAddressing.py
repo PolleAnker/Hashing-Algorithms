@@ -5,22 +5,41 @@ class OpenAddressing:
 
     def __setitem__(self, key, val):
         'Set the given index, h, to be the key,val pair. Handle collision by checking if it is already occupied'
-        i = 0
         h = self.get_hash(key)
-        while not self.arr[h] is None:
-            h = (h+i) % len(self.arr)
-            i+=1
-        self.arr[h] = val
+        if self.arr[h] is None:
+            self.arr[h] = (key, val)
+        else:
+            new_h = self.find_open_slot(key, h)
+            self.arr[new_h] = (key,val)
+        print(self.arr)
 
     def __getitem__(self, key):
         h = self.get_hash(key)
-        return self.arr[h]
+        if self.arr[h] is None:
+            return
+        probingRange = self.get_probing_range(h)
+        for probeIndex in probingRange:
+            element = self.arr[probeIndex]
+            if element is None:
+                return
+            if element[0] == key:
+                return element[1]
 
     def __delitem__(self, key):
         h = self.get_hash(key)
         self.arr[h] = None
 
+    def get_probing_range(self, index):
+        return [*range(index, len(self.arr))] + [*range(0, index)]
 
+    def find_open_slot(self, key, index):
+        probingRange = self.get_probing_range(index)
+        for probeIndex in probingRange:
+            if self.arr[probeIndex] is None:
+                return probeIndex
+            if self.arr[probeIndex][0] == key:
+                return probeIndex
+        raise Exception("Hashmap is full!")
 
 
     def get_hash(self, key):
