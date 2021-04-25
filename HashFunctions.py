@@ -18,3 +18,9 @@ def get_hash(key, size, hashMode):
         for char in key:
             h += ord(char)
         return
+
+    if hashMode == "Prime":
+        h = 0
+        for char in key:
+            h += ord(char)
+        return 

@@ -51,7 +51,10 @@ class OpenAddressing:
             if self.probeMode == "Linear":
                 probeIndex = probeIndex
             if self.probeMode == "Quadratic":
-                probeIndex = (index + (probeIndex**2)) % self.MAX 
+                probeIndex = (index + (probeIndex**2)) % self.MAX
+            if self.probeMode == "Double":
+                h2 = HashFunctions.get_hash(key, self.MAX, "Prime")
+                probeIndex = (index + (probeIndex * h2)) % self.MAX
             
             if self.arr[probeIndex] is None:
                 return probeIndex
