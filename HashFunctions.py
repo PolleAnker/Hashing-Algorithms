@@ -1,4 +1,4 @@
-"File holding get_hash functions for hashing a key to an index in the hash map"
+import math
 
 def get_hash(key, size, hashMode):
     """Hashes input key to an index in the hash map. size is the size of the hash map. hashMode can be either 'Division, Multiplication, Universal or Prime'"""
@@ -6,13 +6,15 @@ def get_hash(key, size, hashMode):
         h = 0
         for char in key:
             h += ord(char)
-        return h % size
+        h = h % size
+        return h
     
     if hashMode == "Multiplication":
         h = 0
         for char in key:
             h += ord(char)
-        return
+        h = math.floor(size * (h*0.6180339887 - math.floor(h*0.6180339887)))
+        return h
 
     if hashMode == "Universal":
         h = 0
@@ -24,4 +26,5 @@ def get_hash(key, size, hashMode):
         h = 0
         for char in key:
             h += ord(char)
-        return 
+        h = (5 - (h % 5))
+        return h

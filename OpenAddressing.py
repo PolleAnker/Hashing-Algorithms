@@ -15,7 +15,11 @@ class OpenAddressing:
     "MAIN FUNCTIONS (Set, Get and Delete items)"
     def __setitem__(self, key, val):
         "Set an item / index in hash map to be found with the key and hold the value val"
-        h = HashFunctions.get_hash(key, self.MAX, self.hashFunction)
+        if self.probeMode == "Double":
+            h = HashFunctions.get_hash(key, self.MAX, "Division")
+        else:
+            h = HashFunctions.get_hash(key, self.MAX, self.hashFunction)
+        
         if self.arr[h] is None:
             self.arr[h] = (key, val)
         else:
