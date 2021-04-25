@@ -42,6 +42,7 @@ class QuadProbing:
         'Calculate the new hash using the step THIS HAS TO BE MADE QUADRATIC SOMEHOW'
         probingRange = self.get_probing_range(index)
         for probeIndex in probingRange:
+            probeIndex = (index + (probeIndex**2)) % self.MAX
             if self.arr[probeIndex] is None:
                 return probeIndex
             if self.arr[probeIndex] == "Deleted":
