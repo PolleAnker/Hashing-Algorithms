@@ -32,19 +32,18 @@ class OpenAddressing:
         probingRange = self.get_probing_range(h)
         for probeIndex in probingRange:
             amountOfFor += 1
-            if self.arr[probeIndex] is None:
-                print("Delete Item for loop was run " + str(amountOfFor) + " times")
-                return # item not found so return. You can also throw exception
             if self.arr[probeIndex][0] == key:
                 self.arr[probeIndex]=None
-        print(self.arr)
+                return
+            if self.arr[probeIndex] is None:
+                raise Exception("Element to delete not found")
 
     def get_probing_range(self, index):
         return [*range(index, len(self.arr))] + [*range(0, index)]
 
     def find_open_slot(self, key, index):
         probingRange = self.get_probing_range(index)
-        for probeIndex in probingRange:
+        for probeIndex in probingRange: 
             if self.arr[probeIndex] is None:
                 return probeIndex
             if self.arr[probeIndex][0] == key:

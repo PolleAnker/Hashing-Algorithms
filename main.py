@@ -15,6 +15,7 @@ print(valHOANull)
 print(HOA.arr)
 
 del HOA["march 17"]
+print(HOA.arr)
 
 """
 "Chaining Test"
