@@ -14,3 +14,4 @@ print(valHOA2)
 print(valHOANull)
 print(HOA.arr)
 
+del HOA["march 17"]
