@@ -1,7 +1,7 @@
 import math
 
 def get_hash(key, size, hashMode):
-    """Hashes input key to an index in the hash map. size is the size of the hash map. hashMode can be either 'Division, Multiplication, Universal or Prime'"""
+    """Hashes input key to an index in the hash map. size is the size of the hash map. hashMode can be either 'Division, Multiplication or Prime'"""
     if hashMode == "Division":
         h = 0
         for char in key:
@@ -15,12 +15,6 @@ def get_hash(key, size, hashMode):
             h += ord(char)
         h = math.floor(size * (h*0.6180339887 - math.floor(h*0.6180339887)))
         return h
-
-    if hashMode == "Universal":
-        h = 0
-        for char in key:
-            h += ord(char)
-        return
 
     if hashMode == "Prime":
         h = 0

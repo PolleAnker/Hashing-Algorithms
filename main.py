@@ -1,7 +1,10 @@
+import random
 from Chaining import Chaining
 from OpenAddressing import OpenAddressing
 
 "Open Addressing Test"
+hash_function = ["Division", "Multiplication", "Prime"] #For universal hashing, e.g. choose random function at runtime, use random.choice(hash_function) in hashFunction field.
+
 HOA = OpenAddressing("Division", "Linear")
 
 HOA["march 6"] = 130

@@ -3,7 +3,7 @@ import HashFunctions
 
 class OpenAddressing:
     """Hash map using 'open addressing' to handle collisions. 
-        It takes a desired hash function ('Division, Multiplication, Universal or Prime') 
+        It takes a desired hash function ('Division, Multiplication or Prime') 
         and desired probing method ('Linear, Quadratic or Double) as input"""
     def __init__(self, hashFunction, probeMode):
         self.hashFunction = hashFunction
