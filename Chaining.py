@@ -1,5 +1,5 @@
 'Hash table using chaining to handle collisions'
-class HashTableChained:
+class Chaining:
     def __init__(self):
         self.MAX = 100
         self.arr = [[] for i in range(self.MAX)]
@@ -9,13 +9,12 @@ class HashTableChained:
         foundelement = False
         'If a key already exists at an index, add it in linked list form (Chaining approach)'
         for index, element in enumerate(self.arr[h]):
-            if len(element) == 2 and element[0] == key:
+            if len(element)==2 and element[0] == key:
                 self.arr[h][index] = (key, val)
                 foundelement = True
                 break
         if not foundelement:
             self.arr[h].append((key, val))
-
 
     def __getitem__(self, key):
         h = self.get_hash(key)
