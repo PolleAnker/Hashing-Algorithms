@@ -11,7 +11,6 @@ class QuadProbing:
         else:
             new_h = self.find_open_slot(key, h)
             self.arr[new_h] = (key,val)
-        print(self.arr)
 
     def __getitem__(self, key):
         h = self.get_hash(key)
@@ -30,7 +29,7 @@ class QuadProbing:
         probingRange = self.get_probing_range(h)
         for probeIndex in probingRange:
             if self.arr[probeIndex][0] == key:
-                self.arr[probeIndex]=None
+                self.arr[probeIndex]= "Deleted"
                 return
             if self.arr[probeIndex] is None:
                 raise Exception("Element to delete not found")
@@ -40,10 +39,12 @@ class QuadProbing:
         return [*range(index, len(self.arr))] + [*range(0, index)]
 
     def find_open_slot(self, key, index):
-        'Calculate the new hash using the step, probeIndex as the new hashed value'
+        'Calculate the new hash using the step THIS HAS TO BE MADE QUADRATIC SOMEHOW'
         probingRange = self.get_probing_range(index)
-        for probeIndex in probingRange: 
+        for probeIndex in probingRange:
             if self.arr[probeIndex] is None:
+                return probeIndex
+            if self.arr[probeIndex] == "Deleted":
                 return probeIndex
             if self.arr[probeIndex][0] == key:
                 return probeIndex

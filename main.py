@@ -21,6 +21,8 @@ print(HOA.arr)
 
 del HOA["march 17"]
 print(HOA.arr)
+HOA["march 17"] = 20
+print(HOA.arr)
 
 """
 "Chaining Test"

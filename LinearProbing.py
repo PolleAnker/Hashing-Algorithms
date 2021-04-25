@@ -30,7 +30,7 @@ class LinearProbing:
         probingRange = self.get_probing_range(h)
         for probeIndex in probingRange:
             if self.arr[probeIndex][0] == key:
-                self.arr[probeIndex]=None
+                self.arr[probeIndex]= "Deleted"
                 return
             if self.arr[probeIndex] is None:
                 raise Exception("Element to delete not found")
@@ -44,6 +44,8 @@ class LinearProbing:
         probingRange = self.get_probing_range(index)
         for probeIndex in probingRange: 
             if self.arr[probeIndex] is None:
+                return probeIndex
+            if self.arr[probeIndex] == "Deleted":
                 return probeIndex
             if self.arr[probeIndex][0] == key:
                 return probeIndex
