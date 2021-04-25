@@ -1,8 +1,8 @@
 from Chaining import Chaining
-from OpenAddressing import OpenAddressing
+from LinearProbing import LinearProbing
 
 "Open Addressing Test (linear probing)"
-HOA = OpenAddressing()
+HOA = LinearProbing()
 
 HOA["march 6"] = 130
 HOA["march 17"] = 20

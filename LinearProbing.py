@@ -1,4 +1,4 @@
-class OpenAddressing:
+class LinearProbing:
     def __init__(self):
         self.MAX = 10
         self.arr = [None for i in range(self.MAX)]
@@ -25,13 +25,10 @@ class OpenAddressing:
             if element[0] == key:
                 return element[1]
 
-    "Delete function is buggy and not working, not sure why"
     def __delitem__(self, key):
-        amountOfFor = 0
         h = self.get_hash(key)
         probingRange = self.get_probing_range(h)
         for probeIndex in probingRange:
-            amountOfFor += 1
             if self.arr[probeIndex][0] == key:
                 self.arr[probeIndex]=None
                 return
@@ -39,9 +36,11 @@ class OpenAddressing:
                 raise Exception("Element to delete not found")
 
     def get_probing_range(self, index):
+        'Set probing range to be from the index (hashed key) to the length of the hashmap, and from the start to the index'
         return [*range(index, len(self.arr))] + [*range(0, index)]
 
     def find_open_slot(self, key, index):
+        'Calculate the new hash using the step, probeIndex as the new hashed value'
         probingRange = self.get_probing_range(index)
         for probeIndex in probingRange: 
             if self.arr[probeIndex] is None:
