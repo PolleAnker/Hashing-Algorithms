@@ -45,11 +45,12 @@ class OpenAddressing:
         hash = HashFunctions.get_hash(key, self.MAX, self.hash_function)
         probing_range = self.get_probing_range(hash)
         for probe_index in probing_range:
-            if self.hash_map[probe_index][0] == key:
+            if self.hash_map[probe_index] is None:
+                print("Deletion of " + str(key) + " failed at probing index " + str(probe_index))
+                return
+            if self.hash_map[probe_index] == key:
                 self.hash_map[probe_index]= "Deleted"
                 return
-            if self.hash_map[probe_index] is None:
-                raise Exception("Element to delete not found")
 
 
     #HELPER FUNCTIONS (For assisting in finding new hash map indices in case of collision)3

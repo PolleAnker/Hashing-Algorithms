@@ -17,7 +17,7 @@ def get_hash(key, size, hash_mode):
         return hashed_key
 
 
-def hash_evaluation(hash_map, dataset):
+def hash_evaluation(hash_map, dataset, item_to_delete, item_to_find):
     start_time_in = time.time()
     tracemalloc.start()
     # Hashing dataset
@@ -36,18 +36,18 @@ def hash_evaluation(hash_map, dataset):
     executionTimeIn = time.time() - start_time_in
     # Delete metrics
 
-    print("Item to delete is: " + str(hash_map[2765]))
+    print("Item to delete is: " + str(hash_map[item_to_delete]))
     start_time_del = time.time()
     tracemalloc.start()
-    del hash_map[2765]
+    del hash_map[item_to_delete]
     current_mem_del, peak_mem_del = tracemalloc.get_traced_memory()
     tracemalloc.stop()
     execution_time_del = time.time() - start_time_del
-    print("Item is now: " + str(hash_map[2765]))
+    print("Item is now: " + str(hash_map[item_to_delete]))
     # Search metrics
     start_time_search = time.time()
     tracemalloc.start()
-    print("Search result: " + hash_map[663])
+    print("Search result: " + hash_map[item_to_find])
     execution_time_search = time.time() - start_time_search
     current_mem_search, peak_mem_search = tracemalloc.get_traced_memory()
     tracemalloc.stop()
