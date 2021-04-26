@@ -34,10 +34,10 @@ class OpenAddressing:
         for probe_index in probing_range:
             element = self.hash_map[probe_index]
             if element is None:
-                print(element)
+                print(str(element))
                 return
             if element[0] == key:
-                print(element)
+                print(str(element))
                 return element[1]
 
     def __delitem__(self, key):
@@ -46,11 +46,10 @@ class OpenAddressing:
         probing_range = self.get_probing_range(hash)
         for probe_index in probing_range:
             if self.hash_map[probe_index] is None:
-                print("Deletion of " + str(key) + " failed at probing index " + str(probe_index))
                 return
-            if self.hash_map[probe_index] == key:
+            if self.hash_map[probe_index][0] == key:
+                print("Deletion successfull")
                 self.hash_map[probe_index]= "Deleted"
-                return
 
 
     #HELPER FUNCTIONS (For assisting in finding new hash map indices in case of collision)3
