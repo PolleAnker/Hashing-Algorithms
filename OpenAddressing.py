@@ -4,74 +4,76 @@ class OpenAddressing:
     """Hash map using 'open addressing' to handle collisions. 
         It takes a desired hash function ('Division, Multiplication or Prime') 
         and desired probing method ('Linear, Quadratic or Double) as input"""
-    def __init__(self, size ,hashFunction, probeMode):
-        self.hashFunction = hashFunction
-        self.probeMode = probeMode
+    def __init__(self, size ,hash_function, probe_mode):
+        self.hash_function = hash_function
+        self.probe_mode = probe_mode
         self.MAX = size
-        self.arr = [None for i in range(self.MAX)]
+        self.hash_map = [None for i in range(self.MAX)]
 
     
     #MAIN FUNCTIONS (Set, Get and Delete items)#
     def __setitem__(self, key, val):
         #Set an item / index in hash map to be found with the key and hold the value val
-        if self.probeMode == "Double":
-            h = HashFunctions.get_hash(key, self.MAX, "Division")
+        if self.probe_mode == "Double":
+            hash = HashFunctions.get_hash(key, self.MAX, "Division")
         else:
-            h = HashFunctions.get_hash(key, self.MAX, self.hashFunction)
+            hash = HashFunctions.get_hash(key, self.MAX, self.hash_function)
         
-        if self.arr[h] is None:
-            self.arr[h] = (key, val)
+        if self.hash_map[hash] is None:
+            self.hash_map[hash] = (key, val)
         else:
-            new_h = self.find_open_slot(key, h)
-            self.arr[new_h] = (key,val)
+            new_h = self.find_open_slot(key, hash)
+            self.hash_map[new_h] = (key,val)
 
     def __getitem__(self, key):
         #Takes a key as input, which it finds in the hash map, returning its corresponding value.
-        h = HashFunctions.get_hash(key, self.MAX, self.hashFunction)
-        if self.arr[h] is None:
+        hash = HashFunctions.get_hash(key, self.MAX, self.hash_function)
+        if self.hash_map[hash] is None:
             return
-        probingRange = self.get_probing_range(h)
-        for probeIndex in probingRange:
-            element = self.arr[probeIndex]
+        probing_range = self.get_probing_range(hash)
+        for probe_index in probing_range:
+            element = self.hash_map[probe_index]
             if element is None:
+                print(element)
                 return
             if element[0] == key:
+                print(element)
                 return element[1]
 
     def __delitem__(self, key):
         #Delete the given key and corresponding value from the hash map
-        h = HashFunctions.get_hash(key, self.MAX, self.hashFunction)
-        probingRange = self.get_probing_range(h)
-        for probeIndex in probingRange:
-            if self.arr[probeIndex][0] == key:
-                self.arr[probeIndex]= "Deleted"
+        hash = HashFunctions.get_hash(key, self.MAX, self.hash_function)
+        probing_range = self.get_probing_range(hash)
+        for probe_index in probing_range:
+            if self.hash_map[probe_index][0] == key:
+                self.hash_map[probe_index]= "Deleted"
                 return
-            if self.arr[probeIndex] is None:
+            if self.hash_map[probe_index] is None:
                 raise Exception("Element to delete not found")
 
 
     #HELPER FUNCTIONS (For assisting in finding new hash map indices in case of collision)3
     def get_probing_range(self, index):
         #Set probing range to be from the index (hashed key) to the length of the hashmap, and from the start to the index
-        return [*range(index, len(self.arr))] + [*range(0, index)]
+        return [*range(index, len(self.hash_map))] + [*range(0, index)]
 
     def find_open_slot(self, key, index):
         #Calculate a new hash map index in case of collision
-        probingRange = self.get_probing_range(index)
-        for probeIndex in probingRange:
+        probing_range = self.get_probing_range(index)
+        for probe_index in probing_range:
             
-            if self.probeMode == "Linear":
-                probeIndex = probeIndex
-            if self.probeMode == "Quadratic":
-                probeIndex = (index + (probeIndex**2)) % self.MAX
-            if self.probeMode == "Double":
+            if self.probe_mode == "Linear":
+                probe_index = probe_index
+            if self.probe_mode == "Quadratic":
+                probe_index = (index + (probe_index**2)) % self.MAX
+            if self.probe_mode == "Double":
                 h2 = HashFunctions.get_hash(key, self.MAX, "Prime")
-                probeIndex = (index + (probeIndex * h2)) % self.MAX
+                probe_index = (index + (probe_index * h2)) % self.MAX
             
-            if self.arr[probeIndex] is None:
-                return probeIndex
-            if self.arr[probeIndex] == "Deleted":
-                return probeIndex
-            if self.arr[probeIndex][0] == key:
-                return probeIndex
+            if self.hash_map[probe_index] is None:
+                return probe_index
+            if self.hash_map[probe_index] == "Deleted":
+                return probe_index
+            if self.hash_map[probe_index][0] == key:
+                return probe_index
         raise Exception("Hashmap is full!")
