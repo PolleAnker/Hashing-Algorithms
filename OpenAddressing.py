@@ -4,10 +4,10 @@ class OpenAddressing:
     """Hash map using 'open addressing' to handle collisions. 
         It takes a desired hash function ('Division, Multiplication or Prime') 
         and desired probing method ('Linear, Quadratic or Double) as input"""
-    def __init__(self, hashFunction, probeMode):
+    def __init__(self, size ,hashFunction, probeMode):
         self.hashFunction = hashFunction
         self.probeMode = probeMode
-        self.MAX = 10
+        self.MAX = size
         self.arr = [None for i in range(self.MAX)]
 
     

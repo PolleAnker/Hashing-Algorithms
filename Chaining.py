@@ -2,9 +2,9 @@
 import HashFunctions
 
 class Chaining:
-    def __init__(self, hashFunction):
+    def __init__(self, size ,hashFunction):
         self.hashFunction = hashFunction
-        self.MAX = 10
+        self.MAX = size
         self.arr = [[] for i in range(self.MAX)]
 
     def __setitem__(self, key, val):

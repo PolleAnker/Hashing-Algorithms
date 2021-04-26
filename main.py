@@ -1,44 +1,28 @@
-import random
-from Chaining import Chaining
 from OpenAddressing import OpenAddressing
+from Chaining import Chaining
 
-"Open Addressing Test"
-hash_function = ["Division", "Multiplication", "Prime"] #For universal hashing, e.g. choose random function at runtime, use random.choice(hash_function) in hashFunction field.
 
-HOA = OpenAddressing("Division", "Linear")
 
-HOA["march 6"] = 130
-HOA["march 17"] = 20
-HOA["march 26"] = 58
-HOA["march 08"] = 70
-valHOA = HOA["march 6"]
-valHOA2 = HOA["march 17"]
-valHOANull = HOA["march 20"]
-valHOA3 = HOA["march 26"]
-print(valHOA)
-print(valHOA2)
-print(valHOANull)
-print(valHOA3)
-print(HOA.arr)
+# Set up hash maps to be filled with data (with sizes corresponding to size of data set)
+OpenHash_150 = OpenAddressing(150, "Division", "Linear")
+OpenHash_500 = OpenAddressing(500, "Division", "Linear")
+OpenHash_3000 = OpenAddressing(3000, "Division", "Linear")
 
-del HOA["march 17"]
-print(HOA.arr)
-HOA["march 17"] = 20 
-print(HOA.arr)
+Chaining_150 = Chaining(150, "Division")
+Chaining_500 = Chaining(500, "Division")
+Chaining_3000 = Chaining(3000, "Division")
 
-"""
-"Chaining Test"
-HTC = Chaining()
 
-HTC["march 6"] = 130
-HTC["march 17"] = 20
-valHTC = HTC["march 6"]
-valHTC2 = HTC["march 17"]
-valHTCNull = HTC["march 20"]
-print(valHTC)
-print(valHTC2)
-print(valHTCNull)
-print(HTC.arr)
-del HTC["march 17"]
-print(HTC.arr)
-"""
+with open("dataset_150.csv", "r") as f:
+    for line in f:
+        tokens = line.split(',')
+        _id = tokens[0]
+        try:
+            name = tokens[1]
+            OpenHash_150[_id] = name
+        except:
+            print("Invalid name, ignore the row")
+
+val_382 = OpenHash_150[382]
+print(OpenHash_150.arr)
+print(val_382)
