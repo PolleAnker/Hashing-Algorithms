@@ -16,13 +16,10 @@ Chaining_3000 = Chaining(3000, "Division")
 with open("dataset(150).txt", "r") as f:
     for line in f:
         tokens = line.split(',')
-        _id = tokens[0]
+        _id = int(tokens[0])
         try:
             name = tokens[1]
             OpenHash_150[_id] = name
+            Chaining_150[_id] = name
         except:
-            print("Invalid name, ignore the row")
-
-val_382 = OpenHash_150[382]
-print(OpenHash_150.arr)
-print(val_382)
+            print("Invalid entry, ignoring row")
