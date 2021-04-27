@@ -67,8 +67,8 @@ class OpenAddressing:
             if self.probe_mode == "Quadratic":
                 probe_index = (index + (probe_index**2)) % self.MAX
             if self.probe_mode == "Double":
-                h2 = HashFunctions.get_hash(key, self.MAX, "Prime")
-                probe_index = (index + (probe_index * h2)) % self.MAX
+                hash_2 = HashFunctions.get_hash(key, self.MAX, "Prime")
+                probe_index = (index + (probe_index * hash_2)) % self.MAX
             
             if self.hash_map[probe_index] is None:
                 return probe_index
