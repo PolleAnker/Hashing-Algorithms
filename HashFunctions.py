@@ -33,7 +33,7 @@ def hash_evaluation(hash_map, dataset, item_to_delete, item_to_find):
 
     current_mem_in, peak_mem_in = tracemalloc.get_traced_memory()
     tracemalloc.stop()
-    executionTimeIn = time.time() - start_time_in
+    execution_time_in = time.time() - start_time_in
 
     # Delete metrics
     start_time_del = time.time()
@@ -59,7 +59,7 @@ def hash_evaluation(hash_map, dataset, item_to_delete, item_to_find):
     print("Peak memory usage for finding item was: " + str(peak_mem_search / 10**6) + " MB")
     print("__________________________________________________________________________")
     print("EXECUTION TIME FOR HASH FUNCTIONS ON " + dataset)
-    print("Execution time of hashing items was: " + str(executionTimeIn) + " seconds")
+    print("Execution time of hashing items was: " + str(execution_time_in) + " seconds")
     print("Execution time of deleting items was: " + str(execution_time_del) + " seconds")
     print("Execution time of finding items was: " + str(execution_time_search) + " seconds")
     print("__________________________________________________________________________")
