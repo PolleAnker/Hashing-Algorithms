@@ -18,8 +18,13 @@ item_to_delete = random.randrange(0,3000)
 item_to_find = random.randrange(0,3000)
 HashFunctions.hash_evaluation(hash_map, "datasetname.txt", item_to_delete, item_to_find)
 ```
+The output of the code above will look something like this in the terminal;
 
+![](Images/output.PNG)
 
 ## Included Data Sets
 The included data sets are randomly generated lists with an integer key and a corresponding "firstname lastname" string value.
 Any data set of this form should work, do bear in mind though, that the code *as is* cannot handle other than integer keys.
+If you're wondering how they look, here's a little sneak peek:
+
+![](Images/dataset.PNG)
